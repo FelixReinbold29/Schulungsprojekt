@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Meine Visitenkarte</title>
+
+    <style>
+        /* SCHRITT 3: DAS STYLING (CSS) */
+        
+        /* So sprechen wir Klassen an: mit einem Punkt (.) vor dem Namen! */
+        
+        /* 1. Der Haupt-Container (Die äußere Kiste) */
+        .card {
+            width: 300px;           /* Macht die Karte genau 300 Pixel breit */
+            border: 2px solid #333; /* Ein dunkler Rahmen um die ganze Karte */
+            border-radius: 8px;     /* Macht die Ecken der Karte leicht rund */
+            overflow: hidden;       /* Verhindert, dass innere Boxen über die runden Ecken ragen */
+            font-family: sans-serif;/* Eine einfache, gut lesbare Schriftart */
+        }
+
+        /* 2. Der Header (Die oberste innere Kiste) */
+        .card-header {
+            background-color: #007bff; /* Blaue Hintergrundfarbe */
+            color: white;              /* Weiße Schrift */
+            padding: 15px;             /* Innenabstand, damit der Text nicht am Rand klebt */
+        }
+
+        /* 3. Der Body (Die mittlere innere Kiste) */
+        .card-body {
+            background-color: #f4f4f4; /* Hellgrauer Hintergrund */
+            padding: 15px;             /* Wieder Innenabstand für den Text */
+        }
+
+        /* 4. Der Footer (Die unterste innere Kiste) */
+        .card-footer {
+            background-color: #e2e2e2; /* Etwas dunkleres Grau zur Abgrenzung */
+            padding: 15px;
+            text-align: center;        /* Zentriert den Link in der Mitte */
+        }
+
+        /* Das Aussehen des Links im Footer anpassen */
+        .card-footer a {
+            color: #007bff;            /* Blaue Schrift für den Link */
+            text-decoration: none;     /* Entfernt den Standard-Unterstrich */
+            font-weight: bold;         /* Macht den Linktext dick */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        
+        <div class="card-header">
+            <h2>Alex Entwickler</h2>
+        </div>
+
+        <div class="card-body">
+            <p>Hallo! Ich bin angehende/r Webentwickler/in. Meine Hobbys sind Programmieren, Wandern und gute Bücher lesen.</p>
+        </div>
+
+        <div class="card-footer">
+            <a href="https://www.google.com" target="_blank">Besuche mein Profil</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de"> <head>
+    <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Meine erste Vorlage</title> <style>
+
+        /* ============================
+           1. HEADER DESIGN
+           ============================ */
+        .header {
+            position: sticky; top: 0; /* Der Header bleibt beim Scrollen oben am Rand "kleben" */
+            display: flex; /* Legt Elemente (Logo und Menü) nebeneinander statt untereinander */
+            justify-content: space-between; /* Schiebt das Logo ganz nach links und das Menü ganz nach rechts */
+            align-items: center; /* Zentriert Logo und Menü vertikal, damit sie auf einer Linie liegen */
+            padding: 1rem 5%; /* Innenabstand: 1rem oben/unten, 5% Platz links/rechts zum Bildschirmrand */
+            background: #fff; /* Weißer Hintergrund */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Wirft einen leichten Schatten nach unten, das trennt ihn vom Text */
+        }
+        
+        /* Das Aussehen der Links im Menü */
+        .header nav a { 
+            margin-left: 20px; /* Schafft Abstand zwischen den einzelnen Links */
+            text-decoration: none; /* Entfernt den Standard-Unterstrich bei Links */
+            color: #333; /* Dunkelgraue Schriftfarbe */
+        }
+        
+        /* Der hervorgehobene "Kontakt"-Button (Call to Action) */
+        .cta { 
+            background: #007bff; /* Blaue Farbe */
+            color: #fff !important; /* Erzwingt weiße Schrift. "!important" ist wie ein Befehl: "Überschreibe alle anderen Regeln!" */
+            padding: 5px 15px; /* Macht den Button größer und klickbarer */
+            border-radius: 5px; /* Macht die Ecken leicht rund */
+        }
+
+        /* ============================
+           2. HAUPTINHALT
+           ============================ */
+        main {
+            height: 1000px; /* Nur zum Lernen: Zwingt die Seite, sehr hoch zu sein, damit du überhaupt scrollen und den Sticky-Header testen kannst! */
+            padding: 2rem 5%; /* Etwas Platz am Rand, damit Text später nicht klebt */
+        }
+
+        /* ============================
+           3. FOOTER DESIGN
+           ============================ */
+        .footer {
+            position: absolute; bottom: 0; left: 0; /* Löst den Footer aus dem normalen Fluss und pinnt ihn knallhart ganz nach unten */
+            width: 100%; /* Macht den Footer so breit wie den Bildschirm */
+            box-sizing: border-box; /* Verhindert, dass das "padding" den Footer breiter als 100% macht (sonst gäbe es einen horizontalen Scrollbalken) */
+            background: #222; /* Sehr dunkles Grau */
+            color: #ccc; /* Hellgraue Schrift */
+            padding: 2rem 5%; /* Innenabstand wie beim Header */
+        }
+        
+        /* Der innere Container des Footers */
+        .footer-content {
+            display: flex; /* Legt den Text und die Links wieder nebeneinander */
+            justify-content: space-between; /* Drückt sie an die Ränder */
+            flex-wrap: wrap; /* Wenn der Bildschirm auf dem Handy zu eng wird, brechen die Elemente sauber untereinander um */
+        }
+        
+        /* Die Links im Footer */
+        .footer a { 
+            color: #fff; 
+            text-decoration: none; 
+            margin-left: 15px; 
+            font-size: 0.9rem; /* Macht die Schrift hier minimal kleiner als im Rest der Seite */
+        }
+
+    </style>
+</head>
+
+<body style="position: relative; min-height: 100vh; margin: 0;">
+    
+    <header class="header">
+        <div class="logo">Brand<span>.</span></div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Shop</a>
+            <a href="#" class="cta">Kontakt</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Willkommen auf meiner Seite!</h1>
+        <p>Scroll nach unten, um den Sticky Header in Aktion zu sehen.</p>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p><b>Brand.</b> Gestaltet für die Zukunft.</p>
+            <div class="links">
+                <a href="#">Impressum</a>
+                <a href="#">Datenschutz</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
