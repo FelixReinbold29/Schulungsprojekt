@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Counter 2.0 - Musterlösung</title>
+    <style>
+         body { font-family: sans-serif; text-align: center; background-color: #f0f0f0; }
+        .dashboard { background: white; padding: 20px; border-radius: 10px; display: inline-block; margin-top: 50px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .status { font-size: 1.5rem; font-weight: bold; margin: 15px 0; }
+        .voll { color: red; }
+        .frei { color: green; }
+        button { padding: 10px 20px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 5px; }
+        button:disabled { background-color: #ccc; }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard">
+        <h1>Logic Palace</h1>
+        <p>Kapazität: <b>10 Personen</b></p>
+        
+        <div id="statusAnzeige" class="status frei">Aktuell: 0 Gäste</div>
+        
+        <div class="controls">
+            <button id="einlassBtn" onclick="einlass()">Gast einlassen (+1)</button>
+            <button class="reset-btn" onclick="feierabend()">Club leeren (Reset)</button>
+        </div>
+    </div>
+
+    <script>
+        // --- GLOBALE VARIABLEN (Das Gedächtnis des Programms) ---
+        let gastAnzahl = 0;
+        const maxKapazitaet = 10;
+
+        // Referenzen auf HTML-Elemente speichern
+        const statusAnzeige = document.getElementById('statusAnzeige');
+        const einlassBtn = document.getElementById('einlassBtn');
+
+        // FUNKTION 1: Gast hinzufügen
+        function einlass() {
+            // 1. Erhöhe die Anzahl
+            gastAnzahl = gastAnzahl + 1;
+
+            // 2. Prüfe auf Vollbelegung
+            if (gastAnzahl >= maxKapazitaet) {
+                // Button deaktivieren
+                einlassBtn.disabled = true;
+                
+                // Optisches Feedback: Klasse ändern und Text setzen
+                statusAnzeige.textContent = "CLUB VOLL!";
+                statusAnzeige.className = "status voll";
+            } else {
+                // Anzeige aktualisieren, wenn noch Platz ist
+                updateAnzeige();
+            }
+        }
+
+        // FUNKTION 2: Text in der Anzeige aktualisieren
+        function updateAnzeige() {
+            statusAnzeige.textContent = "Aktuell: " + gastAnzahl + " Gäste";
+        }
+
+        // FUNKTION 3: Alles zurücksetzen
+        function feierabend() {
+            // Variablen zurücksetzen
+            gastAnzahl = 0;
+            
+            // UI zurücksetzen
+            einlassBtn.disabled = false;
+            statusAnzeige.className = "status frei";
+            updateAnzeige();
+            
+            console.log("Club wurde geleert.");
+        }
+    </script>
+</body>
+</html>

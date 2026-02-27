@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Club Counter 2.0</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background-color: #f0f0f0; }
+        .dashboard { background: white; padding: 20px; border-radius: 10px; display: inline-block; margin-top: 50px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .status { font-size: 1.5rem; font-weight: bold; margin: 15px 0; }
+        .voll { color: red; }
+        .frei { color: green; }
+        button { padding: 10px 20px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 5px; }
+        button:disabled { background-color: #ccc; }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard">
+        <h1>Club "Logic Palace"</h1>
+        <p>Maximale Kapazität: <b>10 Personen</b></p>
+        
+        <div id="statusAnzeige" class="status frei">Aktuell: 0 Gäste</div>
+        
+        <button id="einlassBtn" onclick="einlass()">Gast einlassen (+1)</button>
+        <button onclick="feierabend()">Club leeren (Reset)</button>
+
+        <ul id="log"></ul>
+    </div>
+
+    <script>
+        // --- GLOBALE VARIABLEN ---
+        let gastAnzahl = 0;
+        const maxKapazitaet = 10;
+
+        function einlass() {
+            // AUFGABE 1: Erhöhe die gastAnzahl um 1
+            
+            // AUFGABE 2: Prüfe mit IF, ob gastAnzahl gleich maxKapazitaet ist
+            // Wenn ja: Deaktiviere den Button (Tipp: .disabled = true)
+            // Wenn ja: Ändere den Text der statusAnzeige auf "CLUB VOLL!"
+            
+            // AUFGABE 3: Rufe die Funktion updateAnzeige() auf
+        }
+
+        function updateAnzeige() {
+            // AUFGABE 4: Schreibe die aktuelle gastAnzahl in das Div 'statusAnzeige'
+        }
+
+        function feierabend() {
+            // AUFGABE 5: Setze gastAnzahl zurück auf 0 und aktiviere den Button wieder
+            // Aktualisiere danach die Anzeige
+        }
+    </script>
+</body>
+</html>
