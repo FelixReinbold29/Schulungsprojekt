@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Kino Ticket Shop</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; text-align: center; background-color: #e9ecef; padding: 50px; }
+        .cinema-box { background: white; padding: 30px; border-radius: 15px; display: inline-block; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        input { padding: 8px; width: 60px; margin: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .message { margin-top: 20px; font-weight: bold; min-height: 24px; }
+        .error { color: #dc3545; }
+        .success { color: #28a745; }
+        .info-panel { background: #f8f9fa; padding: 10px; border-radius: 8px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="cinema-box">
+        <h1>🎬 CineStar Logic</h1>
+        
+        <div class="info-panel">
+            <p>Freie Plätze: <span id="plaetzeAnzeige">40</span></p>
+            <p>Preis pro Ticket: <b>12 €</b></p>
+        </div>
+
+        <div>
+            Alter des Käufers: <input type="number" id="alterInput" placeholder="0"><br>
+            Anzahl Tickets: <input type="number" id="ticketInput" value="1">
+        </div>
+
+        <button onclick="kaufen()">Tickets kaufen</button>
+        <button onclick="reset()">Reset</button>
+
+        <div id="feedback" class="message"></div>
+        <h3 id="totalPreis">Gesamtpreis: 0 €</h3>
+    </div>
+
+    <script>
+                // --- GLOBALE VARIABLEN ---
+        let freiePlaetze = 40;
+        const ticketPreis = 12;
+
+        function kaufen() {
+            // 1. Werte aus den Feldern holen
+            let alter = Number(document.getElementById('alterInput').value);
+            let anzahlTickets = Number(document.getElementById('ticketInput').value);
+            let feedbackAnzeige = document.getElementById('feedback');
+
+            // 2. Gesamtpreis berechnen und anzeigen
+            let gesamtPreis = anzahlTickets * ticketPreis;
+            document.getElementById('totalPreis').innerText = "Gesamtpreis: " + gesamtPreis + " €";
+
+            // 3. Die Logik-Prüfung
+            if (alter < 12) {
+                // Fall A: Zu jung
+                feedbackAnzeige.innerText = "Fehler: Du bist leider noch zu jung!";
+                feedbackAnzeige.className = "message error"; // Macht den Text rot
+            } 
+            else if (anzahlTickets > freiePlaetze) {
+                // Fall B: Nicht genug Plätze
+                feedbackAnzeige.innerText = "Fehler: So viele Plätze sind nicht mehr frei!";
+                feedbackAnzeige.className = "message error";
+            } 
+            else if (anzahlTickets <= 0) {
+                // Bonus: Prüfung ob 0 oder negative Tickets eingegeben wurden
+                feedbackAnzeige.innerText = "Bitte gib eine gültige Ticketanzahl ein.";
+                feedbackAnzeige.className = "message error";
+            }
+            else {
+                // Fall C: Alles okay!
+                freiePlaetze = freiePlaetze - anzahlTickets; // Plätze abziehen
+                
+                feedbackAnzeige.innerText = "Kauf erfolgreich! Viel Spaß im Film.";
+                feedbackAnzeige.className = "message success"; // Macht den Text grün
+                
+                // Anzeige der freien Plätze aktualisieren
+                document.getElementById('plaetzeAnzeige').innerText = freiePlaetze;
+            }
+        }
+
+        function reset() {
+            // Variablen zurücksetzen
+            freiePlaetze = 40;
+            
+            // Anzeige im HTML zurücksetzen
+            document.getElementById('plaetzeAnzeige').innerText = freiePlaetze;
+            document.getElementById('feedback').innerText = "";
+            document.getElementById('totalPreis').innerText = "Gesamtpreis: 0 €";
+            
+            // Input Felder leeren
+            document.getElementById('alterInput').value = "";
+            document.getElementById('ticketInput').value = "1";
+        }
+    </script>
+</body>
+</html>

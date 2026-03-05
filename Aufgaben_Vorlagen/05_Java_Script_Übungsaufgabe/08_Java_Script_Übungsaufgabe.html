@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>VIP Gästeliste Manager</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #1a1a2e; color: white; text-align: center; padding: 40px; }
+        .container { background: #16213e; padding: 25px; border-radius: 15px; display: inline-block; box-shadow: 0 0 20px rgba(0,0,0,0.5); width: 350px; }
+        input[type="text"] { padding: 10px; border-radius: 5px; border: none; width: 70%; margin-bottom: 10px; }
+        .controls { margin-bottom: 20px; border-bottom: 1px solid #4e4e4e; padding-bottom: 15px; }
+        ul { list-style: none; padding: 0; text-align: left; }
+        li { background: #0f3460; margin: 5px 0; padding: 10px; border-radius: 5px; display: flex; justify-content: space-between; }
+        .vip-tag { color: #e94560; font-weight: bold; font-size: 0.8rem; border: 1px solid #e94560; padding: 2px 5px; border-radius: 3px; }
+        .stats { font-size: 0.9rem; color: #add8e6; margin-top: 20px; }
+        button { cursor: pointer; background: #e94560; color: white; border: none; padding: 10px 15px; border-radius: 5px; }
+        button:hover { background: #ff4d6d; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Bouncer 3.0</h1>
+        
+        <div class="controls">
+            <input type="text" id="nameInput" placeholder="Name des Gastes...">
+            <br>
+            <label>
+                <input type="checkbox" id="vipCheck"> VIP Status?
+            </label>
+            <br><br>
+            <button onclick="gastHinzufuegen()">Gast hinzufügen</button>
+        </div>
+
+        <ul id="gaesteListe">
+            </ul>
+
+        <div class="stats">
+            Gäste insgesamt: <span id="anzahlGesamt">0</span> | VIPs: <span id="anzahlVip">0</span>
+        </div>
+        <br>
+        <button onclick="listeLeeren()" style="background: #4e4e4e;">Liste leeren</button>
+    </div>
+
+    <script>
+        // --- DEIN DATENSPEICHER ---
+        // AUFGABE 1: Erstelle ein leeres Array namens 'gaeste'.
+        let gaeste = [];
+
+        function gastHinzufuegen() {
+            const nameField = document.getElementById('nameInput');
+            const vipField = document.getElementById('vipCheck');
+
+            // AUFGABE 2: Erstelle ein Objekt für den neuen Gast.
+            // Es soll zwei Eigenschaften haben: 'name' und 'isVip' (true/false).
+            
+            // AUFGABE 3: Füge dieses Objekt mit .push() in dein 'gaeste' Array ein.
+
+            // Felder leeren nach Eingabe
+            nameField.value = "";
+            vipField.checked = false;
+
+            updateAnzeige();
+        }
+
+        function updateAnzeige() {
+            const listeHtml = document.getElementById('gaesteListe');
+            const gesamtAnzeige = document.getElementById('anzahlGesamt');
+            const vipAnzeige = document.getElementById('anzahlVip');
+
+            // Liste im HTML leeren, bevor wir sie neu zeichnen
+            listeHtml.innerHTML = "";
+            let vipZaehler = 0;
+
+            // AUFGABE 4: Nutze eine Schleife (z.B. gaeste.forEach(gast => { ... })), 
+            // um für jeden Gast im Array ein <li> Element zu erstellen.
+            
+            // TIPP für die Schleife:
+            // 1. Prüfe: Wenn gast.isVip wahr ist, erhöhe den vipZaehler.
+            // 2. Erstelle einen String für das <li>, z.B.:
+            //    let vipBadge = gast.isVip ? "<span class='vip-tag'>VIP</span>" : "";
+            //    listeHtml.innerHTML += `<li>${gast.name} ${vipBadge}</li>`;
+
+            // AUFGABE 5: Schreibe die Länge des Arrays in 'gesamtAnzeige'
+            // und den vipZaehler in 'vipAnzeige'.
+        }
+
+        function listeLeeren() {
+            // AUFGABE 6: Leere das Array und rufe updateAnzeige() auf.
+        }
+    </script>
+</body>
+</html>

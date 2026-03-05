@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Gästeliste Manager</title>
+    <style>
+        body { font-family: sans-serif; background-color: #1a1a2e; color: white; text-align: center; padding: 40px; }
+        .container { background: #16213e; padding: 25px; border-radius: 15px; display: inline-block; width: 350px; }
+        input[type="text"] { padding: 10px; border-radius: 5px; width: 70%; margin-bottom: 10px; }
+        ul { list-style: none; padding: 0; text-align: left; }
+        li { background: #0f3460; margin: 5px 0; padding: 10px; border-radius: 5px; }
+        .stats { margin-top: 20px; color: #add8e6; }
+        button { cursor: pointer; background: #e94560; color: white; border: none; padding: 10px 15px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Gästeliste</h1>
+        
+        <div class="controls">
+            <input type="text" id="nameInput" placeholder="Name des Gastes...">
+            <br>
+            <label><input type="checkbox" id="vipCheck"> VIP?</label>
+            <br><br>
+            <button onclick="gastHinzufuegen()">Gast hinzufügen</button>
+        </div>
+
+        <ul id="gaesteListe"></ul>
+
+        <div class="stats">
+            Gäste insgesamt: <span id="anzahlGesamt">0</span> | VIPs: <span id="anzahlVip">0</span>
+        </div>
+        <br>
+        <button onclick="listeLeeren()" style="background: #4e4e4e;">Liste leeren</button>
+    </div>
+
+    <script>
+        // 1. Das Array für die Daten
+        let gaeste = [];
+
+        function gastHinzufuegen() {
+            const nameField = document.getElementById('nameInput');
+            const vipField = document.getElementById('vipCheck');
+
+            // Falls das Feld leer ist, nichts tun
+            if (nameField.value === "") return;
+
+            // Gast-Objekt erstellen
+            const neuerGast = {
+                name: nameField.value,
+                isVip: vipField.checked
+            };
+            
+            // Ins Array pushen
+            gaeste.push(neuerGast);
+
+            // Felder leeren
+            nameField.value = "";
+            vipCheck.checked = false;
+
+            updateAnzeige();
+        }
+
+        function updateAnzeige() {
+            const listeHtml = document.getElementById('gaesteListe');
+            const gesamtAnzeige = document.getElementById('anzahlGesamt');
+            const vipAnzeige = document.getElementById('anzahlVip');
+
+            listeHtml.innerHTML = ""; // Liste leeren
+            let vipZaehler = 0;
+
+            // Schleife durch das Array
+            gaeste.forEach((gast) => {
+                // Li-Element erstellen
+                let eintrag = document.createElement('li');
+                
+                // Text für den Eintrag festlegen
+                if (gast.isVip) {
+                    eintrag.innerText = gast.name + " (VIP)";
+                    vipZaehler++;
+                } else {
+                    eintrag.innerText = gast.name;
+                }
+                
+                // In die Liste im HTML einfügen
+                listeHtml.appendChild(eintrag);
+            });
+
+            // Zahlen in die Anzeige schreiben
+            // Wir nutzen einfach .length für die Gesamtzahl
+            gesamtAnzeige.innerText = gaeste.length;
+            vipAnzeige.innerText = vipZaehler;
+        }
+
+        function listeLeeren() {
+            gaeste = [];
+            updateAnzeige();
+        }
+    </script>
+</body>
+</html>
