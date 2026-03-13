@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Fetch Übung - User Directory</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f9; padding: 20px; }
+        #user-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+        .user-card { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .user-card h3 { margin-top: 0; color: #333; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 5px; margin-bottom: 20px; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+
+    <h1>Mein digitales Adressbuch</h1>
+    <button id="load-btn">Nutzer laden</button>
+
+    <div id="user-container">
+        </div>
+
+    <script>
+    const loadBtn = document.getElementById('load-btn');
+    const userContainer = document.getElementById('user-container');
+
+    // FUNKTION: Daten von der API abrufen
+    async function fetchUsers() {
+        // TODO 1: API-URL definieren
+        const url = 'https://jsonplaceholder.typicode.com/users';
+        
+        try {
+            // TODO 2: Mit fetch() die Daten holen
+            const response = await fetch(url);
+
+            // TODO 3: Prüfen, ob response.ok ist
+            if (!response.ok) {
+                throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+            }
+
+            // TODO 4: Die Daten mit .json() umwandeln
+            const users = await response.json();
+
+            // Aufruf der Anzeige-Funktion
+            renderUsers(users);
+
+        } catch (error) {
+            console.error("Da lief was schief:", error);
+            alert("Fehler beim Laden der Daten!");
+        }
+    }
+
+    // FUNKTION: Daten im HTML anzeigen
+    function renderUsers(users) {
+        userContainer.innerHTML = ''; // Container leeren
+
+        users.forEach(user => {
+            // TODO 5: Erstelle ein div-Element mit der Klasse 'user-card'
+            const card = document.createElement('div');
+            card.className = 'user-card';
+
+            // TODO 6: Fülle das Element mit HTML (Name, E-Mail, Stadt)
+            // Wichtig: Backticks ` benutzen für die Variablen-Interpolation
+            card.innerHTML = `
+                <h3>${user.name}</h3>
+                <p>📧 ${user.email}</p>
+                <p>📍 ${user.address.city}</p>
+            `;
+
+            // TODO 7: Füge das Element dem userContainer hinzu
+            userContainer.appendChild(card);
+        });
+    }
+
+    // Event Listener für den Button
+    loadBtn.addEventListener('click', fetchUsers);
+</script>
+</body>
+</html>
